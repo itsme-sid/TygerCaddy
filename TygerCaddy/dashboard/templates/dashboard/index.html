@@ -1,0 +1,119 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<div class="row">
+                    <div class="col-lg-6 col-sm-12">
+                        <div class="card">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-xs-5">
+                                        <div class="icon-big icon-success text-center">
+                                            <i class="ti-world"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-7">
+                                        <div class="numbers">
+                                            <p>Hosts</p>
+                                            {{ page_obj.paginator.count }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <hr />
+                                    <div class="stats">
+                                        <i class="ti-reload"></i> Updated now
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12">
+                        <div class="card">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-xs-5">
+                                        <div class="icon-big icon-success text-center">
+                                            <i class="ti-panel"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-7">
+                                        <div class="numbers">
+                                            <p>Actions</p>
+                                            <a href="{% url 'create-host' %}" class="btn btn-sm btn-success">Add Host</a><br>
+                                            <a class="btn btn-sm btn-warning">Restart Caddy</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">All Hosts</h4>
+                                <p class="category">Showing {{ page_obj.start_index }} to {{ page_obj.end_index }} of {{ page_obj.paginator.count }} entries</p>
+                            </div>
+                            <div class="content">
+                          <div class="content table-responsive table-full-width">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                    	    <th>Domain</th>
+                                    	    <th>Proxy</th>
+                                    	    <th>Root Path</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for host in hosts %}
+                                        <tr>
+                                        	<td>{{ host.id }}</td>
+                                        	<td>{{ host.host_name }}</td>
+                                        	<td>{{ host.proxy_host }}</td>
+                                        	<td>{{ host.root_path }}</td>
+                                            <td><a class="btn btn-sm btn-warning" href="{% url 'update-host' pk=host.id %}">Edit</a> </td>
+                                            <td><a class="btn btn-sm btn-danger" href="{% url 'delete-host' pk=host.id %}">Delete</a> </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+{% if is_paginated %}
+    <nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    {% if page_obj.has_previous %}
+        <li class="page-item">
+      <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1">Previous</a>
+    </li>
+    {% else %}
+              <li class="page-item disabled">
+      <span>Previous</span>
+    </li>
+    {% endif %}
+    {% for i in paginator.page_range %}
+      {% if page_obj.number == i %}
+        <li class="page-item active"><span class="page-link">{{ i }}</span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+      <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+    {% else %}
+      <li class="page-item disabled"><span>Next</span></li>
+    {% endif %}
+  </ul>
+    </nav>
+{% endif %}
+
+                          </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+{% endblock %}

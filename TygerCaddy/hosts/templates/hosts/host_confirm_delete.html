@@ -1,0 +1,20 @@
+{% extends 'base/base.html' %}
+{% block content %}
+
+<div class="row">
+    <div class="col-lg-6 col-lg-offset-3 col-sm-12">
+        <div class="card">
+            <div class="content">
+                <form action="" method="post" class="form">
+                    {% csrf_token %}
+                   <p>Are you sure you want to delete {{ object.host_name }}?</p>
+                  <button type="submit" class="btn btn-danger">Yes</button>
+                    <a class="btn btn-warning" href="{% url 'dashboard' %}">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
