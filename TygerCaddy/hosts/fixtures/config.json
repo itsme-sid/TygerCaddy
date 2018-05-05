@@ -1,0 +1,10 @@
+[
+  {
+    "model": "hosts.config",
+    "pk": 1,
+    "fields": {
+      "interface": ":80",
+      "proxy_host": "0.0.0.0:9090"
+    }
+  }
+]

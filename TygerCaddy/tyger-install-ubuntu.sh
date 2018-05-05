@@ -32,6 +32,7 @@ echo Installing some handy extras...
 
 apt-get install wget git -y
 pip3 install --upgrade pip
+pip3 install uwsgi
 
 echo Making the app directories...
 mkdir /apps
