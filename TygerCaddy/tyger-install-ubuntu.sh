@@ -62,15 +62,11 @@ chmod 744 /etc/systemd/system/caddy.service
 systemctl daemon-reload
 systemctl enable caddy.service
 
+cp /apps/TygerCaddy/uwsgi.conf /etc/init/uwsgi.conf
 cd /apps/TygerCaddy/TygerCaddy
 
 echo Setting up initial install....
 pip3 install -r requirements.txt
-
-cp /apps/TygerCaddy/uwsgi.service /etc/systemd/system/uwsgi.service
-systemctl enable uwsgi.service
-systemctl start uwsgi.service
-
 
 python3 manage.py migrate
 
