@@ -72,7 +72,7 @@ echo Setting up initial install....
 pip3 install -r requirements.txt
 
 python3 manage.py migrate
-
+python3 manage.py loaddata config
 USER="admin"
 PASS="password"
 MAIL="admin@admin.com"
