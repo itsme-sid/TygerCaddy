@@ -13,6 +13,7 @@ while read -r p ; do sudo apt-get install -y $p ; done < <(cat << "EOF"
     python-pip
     python-dev
     python3.6
+    python3-pip
     build-essential
 EOF
 )
@@ -31,7 +32,7 @@ echo Installing some handy extras...
 
 apt-get install wget git -y
 pip3 install --upgrade pip
-pip3 install --upgrade virtualenv
+
 echo Making the app directories...
 mkdir /apps
 
@@ -55,7 +56,7 @@ touch /etc/caddy/Caddyfile
 mkdir -p /var/www
 chown www-data:www-data /var/www
 chmod 755 /var/www
-cp /apps/TygerCaddy/TygerCaddy/caddy.service /etc/systemd/system/caddy.service
+cp /apps/TygerCaddy/caddy.service /etc/systemd/system/caddy.service
 chown root:root /etc/systemd/system/caddy.service
 chmod 744 /etc/systemd/system/caddy.service
 systemctl daemon-reload
@@ -65,6 +66,11 @@ cd /apps/TygerCaddy/TygerCaddy
 
 echo Setting up initial install....
 pip3 install -r requirements.txt
+
+cp /apps/TygerCaddy/uwsgi.service /etc/systemd/system/uwsgi.service
+systemctl enable uwsgi.service
+systemctl start uwsgi.service
+
 
 python3 manage.py migrate
 
