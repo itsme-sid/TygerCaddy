@@ -59,11 +59,14 @@ chmod 755 /var/www
 cp /apps/TygerCaddy/caddy.service /etc/systemd/system/caddy.service
 chown root:root /etc/systemd/system/caddy.service
 chmod 744 /etc/systemd/system/caddy.service
+cp /apps/TygerCaddy/uwsgi.service /etc/systemd/system/uwsgi.service
 systemctl daemon-reload
 systemctl enable caddy.service
+systemctl enable uwsgi.service
 
-cp /apps/TygerCaddy/uwsgi.conf /etc/init/uwsgi.conf
 cd /apps/TygerCaddy/TygerCaddy
+
+service uwsgi start
 
 echo Setting up initial install....
 pip3 install -r requirements.txt
