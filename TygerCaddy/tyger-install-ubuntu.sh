@@ -36,6 +36,7 @@ pip3 install uwsgi
 
 echo Making the app directories...
 mkdir /apps
+mkdir /apps/TygerCaddy/sites
 
 echo Cloning repository....
 
