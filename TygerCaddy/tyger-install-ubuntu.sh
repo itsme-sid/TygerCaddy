@@ -3,6 +3,9 @@ set -eu -o pipefail # fail on error , debug all lines
 
 sudo -n true
 test $? -eq 0 || exit 1 "you should have sudo priveledge to run this script"
+
+echo 'Starting installer, please look out for the prompts, always select yes'
+
 add-apt-repository ppa:jonathonf/python-3.6
 apt update
 apt upgrade -y
@@ -31,7 +34,6 @@ apt-get update && apt-get upgrade -y
 echo Installing some handy extras...
 sleep 3
 apt-get install wget git -y
-pip3 install --upgrade pip
 pip3 install uwsgi
 
 echo Making the app directories...
