@@ -6,7 +6,6 @@ test $? -eq 0 || exit 1 "you should have sudo priveledge to run this script"
 
 echo 'Starting installer, please look out for the prompts, always select yes'
 
-add-apt-repository ppa:jonathonf/python-3.6
 apt update
 apt upgrade -y
 
@@ -19,17 +18,13 @@ sleep 6
 echo Updating system,
 while read -r p ; do sudo apt-get install -y $p ; done < <(cat << "EOF"
     zip unzip
-    python-pip
-    python-dev
-    python3.6
+    python3-dev
     python3-pip
     build-essential
+    libssl-dev
+    libffi-dev
 EOF
 )
-
-
-
-apt-get update && apt-get upgrade -y
 
 echo Installing some handy extras...
 sleep 3
@@ -85,7 +80,7 @@ service uwsgi start
 service caddy start
 
 echo Setting up initial install....
-sleep3
+sleep 3
 
 pip3 install -r requirements.txt
 
