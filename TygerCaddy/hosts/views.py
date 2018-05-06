@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -8,7 +9,7 @@ from .caddyfile import generate_caddyfile
 # Create your views here.
 
 
-class CreateHost(CreateView):
+class CreateHost(LoginRequiredMixin, CreateView):
     model = Host
     fields = ['host_name', 'proxy_host', 'root_path']
     title = 'Add Host'
@@ -20,13 +21,13 @@ class CreateHost(CreateView):
         return redirect(reverse_lazy('dashboard'))
 
 
-class UpdateHost(UpdateView):
+class UpdateHost(LoginRequiredMixin, UpdateView):
     model = Host
     fields = ['host_name', 'proxy_host', 'root_path']
     slug_field = 'host_name'
 
 
-class DeleteHost(DeleteView):
+class DeleteHost(LoginRequiredMixin, DeleteView):
     model = Host
     title = "Delete Host"
     success_url = reverse_lazy('dashboard')

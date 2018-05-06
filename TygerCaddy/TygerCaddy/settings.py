@@ -59,7 +59,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'TygerCaddy.urls'
-
+LOGIN_REDIRECT_URL = 'dashboard'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
