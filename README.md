@@ -14,7 +14,7 @@ Currently only ubuntu is supported by the install script
 SSH on to your server. 
 
 ```
-cd /temp
+cd /tmp
 ```
 Get the Ubuntu Installer
 
