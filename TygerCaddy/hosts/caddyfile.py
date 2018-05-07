@@ -25,6 +25,7 @@ def generate_caddyfile():
         print('Proxy ' + caddyhost.proxy_host)
         proxy = 'proxy / ' + caddyhost.proxy_host + ' { \n' \
                 'transparent \n' \
+                'insecure_skip_verify' \
                 '  } \n'
 
         if caddyhost.tls:
