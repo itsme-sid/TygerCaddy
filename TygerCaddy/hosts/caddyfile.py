@@ -24,9 +24,6 @@ def generate_caddyfile():
         print('Proxy ' + caddyhost.proxy_host)
         proxy = 'proxy / ' + caddyhost.proxy_host + ' { \n' \
                 'transparent \n' \
-                'proxy_header Host {host} \n' \
-                'proxy_header X-Real-IP {remote} \n' \
-                'proxy_header X-Forwarded-Proto {scheme} \n' \
                 '  } \n'
 
         if caddyhost.tls:
@@ -46,9 +43,6 @@ def generate_caddyfile():
     proxy = 'proxy / ' + config.proxy_host + ' { \n' \
                                              'transparent \n' \
                                              'except /assets \n' \
-                                             'proxy_header Host {host} \n' \
-                                             'proxy_header X-Real-IP {remote} \n' \
-                                             'proxy_header X-Forwarded-Proto {scheme} \n' \
                                              '} \n \n'
     caddyfile.write(domain + proxy)
     print('Finished')

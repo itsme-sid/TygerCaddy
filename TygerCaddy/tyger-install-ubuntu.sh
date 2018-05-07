@@ -6,8 +6,7 @@ test $? -eq 0 || exit 1 "you should have sudo priveledge to run this script"
 
 echo 'Starting installer, please look out for the prompts, always select yes'
 
-apt update
-apt upgrade -y
+apt update && apt upgrade -y
 
 echo Installing the app pre-requisites
 echo you have 5 seconds to proceed ...
