@@ -71,7 +71,7 @@ cp /apps/TygerCaddy/uwsgi.service /etc/systemd/system/uwsgi.service
 systemctl daemon-reload
 systemctl enable caddy.service
 systemctl enable uwsgi.service
-
+chmod -R 0777 /apps
 cd /apps/TygerCaddy/TygerCaddy
 
 echo Starting base Services.....
