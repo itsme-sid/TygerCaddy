@@ -2,7 +2,12 @@
 Caddy based reverse proxy app with web GUI
 ![alt text](https://github.com/morph1904/TygerCaddy/raw/master/TygerCaddy/assets/img/screenshot.png)
 
-## Install Instructions (Ubuntu 16.04 +)
+
+
+##INFO!
+Please be aware this is still in BETA and not suitable for a production environment. 
+
+###Install Instructions (Ubuntu 16.04 +)
 Currently only ubuntu is supported by the install script
 
 
