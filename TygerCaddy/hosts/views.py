@@ -25,7 +25,7 @@ class CreateHost(LoginRequiredMixin, CreateView):
 
 class UpdateHost(LoginRequiredMixin, UpdateView):
     model = Host
-    fields = ['host_name', 'proxy_host', 'root_path']
+    fields = ['host_name', 'proxy_host', 'root_path', 'tls']
     slug_field = 'host_name'
     success_url = reverse_lazy('dashboard')
 
