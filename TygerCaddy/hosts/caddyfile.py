@@ -1,6 +1,6 @@
 import os
 import time
-from subprocess import call
+import subprocess
 from django.conf import settings
 from .models import Host, Config
 from django.contrib.auth.models import User
@@ -53,7 +53,7 @@ def generate_caddyfile():
     with open(project + '/caddypid.txt', 'r') as caddyservice:
         caddypid = caddyservice.read()
 
-    reload = call(["kill -s USR1 ", caddypid])
+    reload = subprocess.call(["kill -s USR1 " + caddypid])
 
     return True
 
