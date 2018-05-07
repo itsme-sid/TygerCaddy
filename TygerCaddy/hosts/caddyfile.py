@@ -50,7 +50,7 @@ def generate_caddyfile():
     caddyfile.write(domain + proxy + root)
     print('Finished')
 
-    with open(project + 'caddypid.txt', 'r') as caddyservice:
+    with open(project + '/caddypid.txt', 'r') as caddyservice:
         caddypid = caddyservice.read()
 
     reload = call(["kill -s USR1 ", caddypid])
