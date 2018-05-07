@@ -64,6 +64,8 @@ echo Setting up services to run on boot...
 sleep 3
 
 cp /apps/TygerCaddy/caddy.service /etc/systemd/system/caddy.service
+cp /apps/TygerCaddy/caddy-reload.path /etc/systemd/system/caddy-reload.path
+cp /apps/TygerCaddy/caddy-reload.service /etc/systemd/system/caddy-reload.service
 chown root:root /etc/systemd/system/caddy.service
 chmod 744 /etc/systemd/system/caddy.service
 cp /apps/TygerCaddy/uwsgi.service /etc/systemd/system/uwsgi.service
@@ -108,6 +110,9 @@ else:
     print('Superuser creation skipped.');
 "
 printf "$script" | python3 manage.py shell
+
+service uwsgi stop
+service uwsgi start
 
 echo Install Complete!, Enter the server IP in your chosen browser and login with username $uservar and the password you provided earlier.
 
