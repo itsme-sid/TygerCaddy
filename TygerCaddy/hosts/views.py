@@ -29,6 +29,12 @@ class UpdateHost(LoginRequiredMixin, UpdateView):
     slug_field = 'host_name'
     success_url = reverse_lazy('dashboard')
 
+    def form_valid(self, form):
+
+        form.save()
+        caddy = generate_caddyfile()
+        return redirect(reverse_lazy('dashboard'))
+
 
 class DeleteHost(LoginRequiredMixin, DeleteView):
     model = Host
