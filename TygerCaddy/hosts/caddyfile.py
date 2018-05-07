@@ -44,8 +44,12 @@ def generate_caddyfile():
                                              'transparent \n' \
                                              'except /assets \n' \
                                              '} \n \n'
-    caddyfile.write(domain + proxy)
+    root = 'root /apps/TygerCaddy/TygerCaddy/ \n' \
+           '} \n'
+    caddyfile.write(domain + proxy + root)
     print('Finished')
+
+
     return True
 
 
