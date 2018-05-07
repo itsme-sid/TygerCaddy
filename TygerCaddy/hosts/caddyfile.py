@@ -52,9 +52,12 @@ def generate_caddyfile():
 
     with open(project + '/caddypid.txt', 'r') as caddyservice:
         caddypid = caddyservice.read().replace('\n', '')
+        print(caddypid)
 
-    reload = subprocess.call(["kill -s USR1 " + caddypid])
-
+    command = "kill -s USR1 " + caddypid
+    print(command)
+    reload = subprocess.run(command, shell=True)
+    print(reload)
     return True
 
 
