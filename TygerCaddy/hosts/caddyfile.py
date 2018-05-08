@@ -20,8 +20,12 @@ def generate_caddyfile():
     config = Config.objects.get(pk=1)
 
     for caddyhost in host_set:
-        print('Generating ' + caddyhost.host_name)
-        domain = caddyhost.host_name + ' { \n \n'
+        print(caddyhost.tls)
+        if (caddyhost.tls == False):
+            domain = caddyhost.host_name + ':80 { \n \n'
+        else:
+            domain = caddyhost.host_name + ' { \n \n'
+
         print('Proxy ' + caddyhost.proxy_host)
         proxy = 'proxy / ' + caddyhost.proxy_host + ' { \n' \
                 'transparent \n' \
@@ -32,11 +36,11 @@ def generate_caddyfile():
             print('TLS ' + user.email)
             caddytls = 'tls ' + user.email + '\n } \n \n'
             caddyfile.write(domain + proxy + caddytls)
-
         else:
             print('No TLS ')
             proxy = proxy + '} \n \n'
             caddyfile.write(domain + proxy)
+            caddyfile.close()
 
     caddyfile = open(caddyfilepath, "a")
     print('Generating default host' + config.interface)
@@ -49,16 +53,17 @@ def generate_caddyfile():
     root = 'root /apps/TygerCaddy/TygerCaddy/ \n' \
            '} \n'
     caddyfile.write(domain + proxy + root)
+    caddyfile.close()
     print('Finished')
 
-    with open(project + '/caddypid.txt', 'r') as caddyservice:
-        caddypid = caddyservice.read().replace('\n', '')
-        print(caddypid)
+    # with open(project + '/caddypid.txt', 'r') as caddyservice:
+    #   caddypid = caddyservice.read().replace('\n', '')
+    #  print(caddypid)
 
-    command = "kill -s USR1 " + caddypid
-    print(command)
-    reload = subprocess.run(command, shell=True)
-    print(reload)
+    # command = "kill -s USR1 " + caddypid
+    # print(command)
+    # reload = subprocess.run(command, shell=True)
+    subprocess.call(['sudo', 'service', 'caddy', 'reload'])
     return True
 
 
